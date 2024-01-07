@@ -34,7 +34,7 @@ async function updateAccessToken(token: string) {
 }
 
 async function refreshAccessToken() {
-  const refreshToken = getRefreshToken();
+  const refreshToken = await getRefreshToken();
   try {
     const response = await axiosInstance.post('/auth/refresh', {
       refreshToken,
@@ -50,7 +50,8 @@ async function refreshAccessToken() {
 
 axiosInstance.interceptors.request.use(
   async function (config) {
-    const accessToken = getAccessToken();
+    const accessToken = await getAccessToken();
+    console.log(accessToken);
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
