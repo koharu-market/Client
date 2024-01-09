@@ -2,6 +2,7 @@
 'use client';
 
 import { axiosInstance } from '@/lib/axios';
+import { UploadFileInfo } from '@/types/Uploads';
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AiOutlineClose, AiOutlineCamera } from 'react-icons/ai';
@@ -16,30 +17,44 @@ export default function FileUpload() {
 
   // 메모리 누수를 방지
   useEffect(() => {
-    return () => myFiles.forEach((file) => URL.revokeObjectURL(file.preview));
+    return () => myFiles.forEach(file => URL.revokeObjectURL(file.preview));
   }, [myFiles]);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    setMyFiles((prevFiles) => {
-      // 이미 선택된 파일과 새로운 파일을 합침
-      const allFiles = prevFiles.concat(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    try {
+      const formData = new FormData();
 
-      // 최대 허용 파일 갯수를 초과하는 경우 초과한 파일들을 제거
-      const truncatedFiles = allFiles.slice(0, 5);
+      acceptedFiles.forEach(file => {
+        formData.append('files', file);
+      });
 
-      // 중복 파일 제거
-      const uniqueFiles = truncatedFiles.filter(
-        (file, index, self) => index === self.findIndex((f) => f.name === file.name)
-      );
+      // Upload files and get server response
+      const response = await handleUpload(formData);
 
-      return uniqueFiles;
-    });
+      if (response) {
+        setMyFiles(prevFiles => {
+          // Combine the server-provided paths with the existing files
+          const updatedFiles = prevFiles.concat(
+            response.map((files: UploadFileInfo) => ({
+              preview: `${process.env.NEXT_PUBLIC_API_URI}/uploads/${files.filename}`,
+              path: files.path,
+            })),
+          );
+
+          // Limit the number of files
+          const truncatedFiles = updatedFiles.slice(0, 5);
+
+          // Remove duplicates
+          const uniqueFiles = truncatedFiles.filter(
+            (file, index, self) => index === self.findIndex(f => f.path === file.path),
+          );
+
+          return uniqueFiles;
+        });
+      }
+    } catch (error) {
+      console.error('Error handling drop:', error);
+    }
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -47,11 +62,11 @@ export default function FileUpload() {
   });
 
   const removeFile = (file: FileWithPreview) => () => {
-    const newFiles = myFiles.filter((f) => f !== file);
+    const newFiles = myFiles.filter(f => f !== file);
     setMyFiles(newFiles);
   };
 
-  const files = myFiles.map((file) => (
+  const files = myFiles.map(file => (
     <li key={file.path} className="relative">
       <img
         src={file.preview}
@@ -77,32 +92,25 @@ export default function FileUpload() {
     </li>
   ));
 
-  const handleUpload = async () => {
-    const formData = new FormData();
-
-    myFiles.forEach((file) => {
-      formData.append('files', file);
-    });
-
+  const handleUpload = async (formData: FormData) => {
     try {
-      // 실제 서버 엔드포인트 및 파일 전송 방식에 맞게 수정
-      const response = await axiosInstance.post('/admin/upload', formData, {
+      const response = await axiosInstance.post('/uploads/multiple', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
       if (response.status === 201) {
-        // 서버에서 파일 처리가 성공적으로 이루어진 경우
-        // 여기서 필요한 로직 추가 가능
         console.log('File upload successful');
+        return response.data;
       } else {
-        // 서버에서 파일 처리가 실패한 경우
         console.error('File upload failed');
       }
     } catch (error) {
       console.error('Error uploading file:', error);
     }
+
+    return null;
   };
 
   return (
@@ -118,11 +126,6 @@ export default function FileUpload() {
         <ul className="flex gap-4">
           {files} {cameraIcons}
         </ul>
-      </div>
-      <div className="text-center">
-        <button onClick={handleUpload} className="mt-4 w-28 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-          전송
-        </button>
       </div>
     </div>
   );
