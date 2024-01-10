@@ -3,22 +3,12 @@
 
 import { axiosInstance } from '@/lib/axios';
 import { UploadFileInfo } from '@/types/Uploads';
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AiOutlineClose, AiOutlineCamera } from 'react-icons/ai';
 
-interface FileWithPreview extends File {
-  preview: string;
-  path?: string;
-}
-
 export default function FileUpload() {
-  const [myFiles, setMyFiles] = useState<FileWithPreview[]>([]);
-
-  // 메모리 누수를 방지
-  useEffect(() => {
-    return () => myFiles.forEach(file => URL.revokeObjectURL(file.preview));
-  }, [myFiles]);
+  const [myFiles, setMyFiles] = useState<UploadFileInfo[]>([]);
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     try {
@@ -28,28 +18,20 @@ export default function FileUpload() {
         formData.append('files', file);
       });
 
-      // Upload files and get server response
-      const response = await handleUpload(formData);
+      const response: UploadFileInfo[] = await handleUpload(formData);
 
       if (response) {
         setMyFiles(prevFiles => {
-          // Combine the server-provided paths with the existing files
           const updatedFiles = prevFiles.concat(
-            response.map((files: UploadFileInfo) => ({
-              preview: `${process.env.NEXT_PUBLIC_API_URI}/uploads/${files.filename}`,
-              path: files.path,
+            response.map(files => ({
+              path: process.env.NEXT_PUBLIC_API_URI + files.path,
+              originalname: files.originalname,
             })),
           );
 
-          // Limit the number of files
           const truncatedFiles = updatedFiles.slice(0, 5);
 
-          // Remove duplicates
-          const uniqueFiles = truncatedFiles.filter(
-            (file, index, self) => index === self.findIndex(f => f.path === file.path),
-          );
-
-          return uniqueFiles;
+          return truncatedFiles;
         });
       }
     } catch (error) {
@@ -61,7 +43,7 @@ export default function FileUpload() {
     onDrop,
   });
 
-  const removeFile = (file: FileWithPreview) => () => {
+  const removeFile = (file: UploadFileInfo) => () => {
     const newFiles = myFiles.filter(f => f !== file);
     setMyFiles(newFiles);
   };
@@ -69,10 +51,10 @@ export default function FileUpload() {
   const files = myFiles.map(file => (
     <li key={file.path} className="relative">
       <img
-        src={file.preview}
+        src={file.path}
         className="w-32 h-[72px]"
         onLoad={() => {
-          URL.revokeObjectURL(file.preview);
+          URL.revokeObjectURL(file.path);
         }}
         alt="상품 이미지"
       />
