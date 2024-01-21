@@ -52,11 +52,14 @@ export const {
   ],
   callbacks: {
     async jwt({ token, user }) {
+      console.log(token, 'token');
       return { ...token, ...user };
     },
 
     async session({ session, token }) {
-      session.role = token.role;
+      if (session.user && token.role) {
+        session.user.role = token.role;
+      }
       return session;
     },
   },
