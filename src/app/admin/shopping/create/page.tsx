@@ -30,7 +30,7 @@ export default function CreatePage() {
         <div className="admin_table_wrap">
           <h2 className="p-2 font-semibold">기본 정보</h2>
           <div>
-            <table className="admin">
+            <table>
               <tbody>
                 <tr>
                   <th>상품명</th>
