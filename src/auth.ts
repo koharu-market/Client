@@ -52,7 +52,6 @@ export const {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log(token, 'token');
       return { ...token, ...user };
     },
 
