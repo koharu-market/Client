@@ -15,27 +15,14 @@ export default function SideBar() {
             <Link href={'/admin'}>koharu</Link>
           </h1>
         </div>
-        <Item
-          icon={<BsGrid />}
-          text="대시보드"
-          href="/admin"
-          segment={undefined}
-        />
+        <Item icon={<BsGrid />} text="대시보드" href="/admin" segment={undefined} />
         <List icon={<HiOutlineShoppingBag />} text="쇼핑" segment={'shopping'}>
           <Item text="상품" href="/admin/shopping" segment={'shopping'} />
-          <Item
-            text="상품 등록"
-            href="/admin/shopping/create"
-            segment={'create'}
-          />
+          <Item text="상품 등록" href="/admin/shopping/create" segment={'create'} />
           <Item text="주문" href="/admin/shopping/order" segment={'order'} />
+          <Item text="분류 관리" href="/admin/shopping/category" segment={'category'} />
         </List>
-        <Item
-          icon={<AiOutlineUser />}
-          text="고객 관리"
-          href="/admin/customer"
-          segment={'customer'}
-        />
+        <Item icon={<AiOutlineUser />} text="고객 관리" href="/admin/member" segment={'customer'} />
         <List icon={<TfiStatsUp />} text="통계" segment={'stats'}>
           <Item text="홈" href="/admin/stats" segment={'stats'} />
           <Item text="매출" href="/admin/stats/take" segment={'take'} />

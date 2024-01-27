@@ -1,7 +1,6 @@
 'use client';
 import ListBox from '@/components/common/ListBox';
-import Header from '../../_component/Header';
-import styles from './table.module.css';
+import Header from '../../_component/ui/Header';
 import { useEffect, useState } from 'react';
 import { ListBox as IListBox } from '@/types/ListBox';
 import { axiosInstance } from '@/lib/axios';
@@ -28,10 +27,10 @@ export default function CreatePage() {
         <h2 className="admin-h2">상품 등록</h2>
       </Header>
       <main>
-        <div className="mb-4 bg-white border">
+        <div className="admin_table_wrap">
           <h2 className="p-2 font-semibold">기본 정보</h2>
           <div>
-            <table className={`w-full border-t ${styles.table}`}>
+            <table className="admin">
               <tbody>
                 <tr>
                   <th>상품명</th>

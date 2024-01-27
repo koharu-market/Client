@@ -1,4 +1,4 @@
-import Header from '../../_component/Header';
+import Header from '../../_component/ui/Header';
 
 export default function TakePage() {
   return (
