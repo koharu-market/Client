@@ -27,4 +27,32 @@
   .admin-h2 {
     @apply text-lg font-semibold;
   }
+
+  .admin_table_wrap {
+    margin-bottom: 4px;
+  }
+  .admin_table_wrap h2 {
+    font-weight: 600;
+    padding: 8px;
+  }
+  .admin_table_wrap table {
+    width: 100%;
+    border: 1px solid #ddd;
+    background-color: white;
+    font-size: 14px;
+  }
+
+  .admin_table_wrap table th {
+    font-weight: 400;
+    text-align: left;
+    vertical-align: top;
+    width: 150px;
+    background-color: #f8f8f8;
+  }
+
+  .admin_table_wrap table th,
+  .admin_table_wrap table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
 }
