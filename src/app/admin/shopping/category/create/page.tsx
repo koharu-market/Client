@@ -2,6 +2,7 @@
 
 import { Button } from '@/app/admin/_component/common/Button';
 import Header from '@/app/admin/_component/ui/Header';
+import TableWrap from '@/app/admin/_component/ui/TableWrap';
 import { axiosInstance } from '@/lib/axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -39,7 +40,7 @@ export default function CreateCategoryPage() {
       </Header>
       <main>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="admin_table_wrap">
+          <TableWrap>
             <h2>분류 설정</h2>
             <table>
               <tbody>
@@ -77,30 +78,26 @@ export default function CreateCategoryPage() {
                 <tr>
                   <th>표시상태</th>
                   <td>
-                    <div className="flex gap-3">
-                      <div>
-                        <label className="flex items-center">
-                          <input
-                            type="radio"
-                            value="Y"
-                            {...register('displayOption')}
-                            className="mr-1.5"
-                            checked={watch('displayOption') === 'Y'}
-                          />
-                          표시함
-                        </label>
+                    <div className="input_wrap">
+                      <div className="radio">
+                        <input
+                          type="radio"
+                          value="Y"
+                          {...register('displayOption')}
+                          checked={watch('displayOption') === 'Y'}
+                          id="displayOption1"
+                        />
+                        <label htmlFor="displayOption1">표시함</label>
                       </div>
-                      <div>
-                        <label className="flex items-center">
-                          <input
-                            type="radio"
-                            value="N"
-                            {...register('displayOption')}
-                            className="mr-1.5"
-                            checked={watch('displayOption') === 'N'}
-                          />
-                          표시안함
-                        </label>
+                      <div className="radio">
+                        <input
+                          type="radio"
+                          value="N"
+                          {...register('displayOption')}
+                          checked={watch('displayOption') === 'N'}
+                          id="displayOption2"
+                        />
+                        <label htmlFor="displayOption2">표시안함</label>
                       </div>
                     </div>
                   </td>
@@ -113,7 +110,7 @@ export default function CreateCategoryPage() {
                 확인
               </Button>
             </div>
-          </div>
+          </TableWrap>
         </form>
       </main>
     </div>
