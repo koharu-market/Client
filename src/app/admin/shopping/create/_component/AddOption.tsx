@@ -2,11 +2,15 @@
 
 import { useInput } from '@/hooks/useInput';
 import { Button } from '../../../_component/common/Button';
-import { useState } from 'react';
 import { Option } from '../types/option';
 
-export default function AddOption() {
-  const [options, setOptions] = useState<Option[]>();
+interface Props {
+  setOptions: React.Dispatch<React.SetStateAction<Option[] | undefined>>;
+}
+
+const splitAndTrim = (value: string) => value.split(',').map(item => item.trim());
+
+export default function AddOption({ setOptions }: Props) {
   const [optValue1, onChangeOptValue1] = useInput('');
   const [optItemValue1, onChangeOptItemValue1] = useInput('');
   const [optValue2, onChangeOptValue2] = useInput('');
@@ -16,9 +20,9 @@ export default function AddOption() {
 
   const onClick = () => {
     const data: Option[] = [];
-    const opt1 = optItemValue1.split(',').map(item => item.trim());
-    const opt2 = optItemValue2.split(',').map(item => item.trim());
-    const opt3 = optItemValue3.split(',').map(item => item.trim());
+    const opt1 = splitAndTrim(optItemValue1);
+    const opt2 = splitAndTrim(optItemValue2);
+    const opt3 = splitAndTrim(optItemValue3);
 
     const opt1_count = opt1.length;
     const opt2_count = opt2.length;
@@ -27,12 +31,13 @@ export default function AddOption() {
     for (let i = 0; i < opt1_count; i++) {
       for (let j = 0; j < opt2_count; j++) {
         for (let k = 0; k < opt3_count; k++) {
+          const id = `key_${i}_${j}_${k}`;
           const checked = false;
           const opt_id = opt1[i] + (opt2[j] ? ' > ' + opt2[j] : '') + (opt3[k] ? ' > ' + opt3[k] : '');
           const price = 0;
           const count = 0;
           const displayOption = 'Y';
-          data.push({ checked, opt_id, price, count, displayOption });
+          data.push({ id, checked, opt_id, price, count, displayOption });
         }
       }
     }

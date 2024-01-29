@@ -8,10 +8,13 @@ import Editor from '../_component/Editor';
 import FileUpload from '../_component/FileUpload';
 import TableWrap from '../../_component/ui/TableWrap';
 import AddOption from './_component/AddOption';
+import OptionList from './_component/OptionList';
+import { Option } from './types/option';
 
 export default function CreatePage() {
   const [category, setCategory] = useState<IListBox[]>([]);
   const [categorySelected, setCategorySelected] = useState<IListBox>(category[0]);
+  const [options, setOptions] = useState<Option[]>();
 
   useEffect(() => {
     const getCategory = async () => {
@@ -156,7 +159,8 @@ export default function CreatePage() {
                         빨,파,노]
                       </p>
                     </div>
-                    <AddOption />
+                    <AddOption setOptions={setOptions} />
+                    <div className="mt-3">{options && <OptionList options={options} />}</div>
                   </td>
                 </tr>
               </tbody>
