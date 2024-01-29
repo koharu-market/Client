@@ -2,14 +2,42 @@
 
 import { useInput } from '@/hooks/useInput';
 import { Button } from '../../../_component/common/Button';
+import { useState } from 'react';
+import { Option } from '../types/option';
 
 export default function AddOption() {
+  const [options, setOptions] = useState<Option[]>();
   const [optValue1, onChangeOptValue1] = useInput('');
   const [optItemValue1, onChangeOptItemValue1] = useInput('');
   const [optValue2, onChangeOptValue2] = useInput('');
   const [optItemValue2, onChangeOptItemValue2] = useInput('');
   const [optValue3, onChangeOptValue3] = useInput('');
   const [optItemValue3, onChangeOptItemValue3] = useInput('');
+
+  const onClick = () => {
+    const data: Option[] = [];
+    const opt1 = optItemValue1.split(',').map(item => item.trim());
+    const opt2 = optItemValue2.split(',').map(item => item.trim());
+    const opt3 = optItemValue3.split(',').map(item => item.trim());
+
+    const opt1_count = opt1.length;
+    const opt2_count = opt2.length;
+    const opt3_count = opt3.length;
+
+    for (let i = 0; i < opt1_count; i++) {
+      for (let j = 0; j < opt2_count; j++) {
+        for (let k = 0; k < opt3_count; k++) {
+          const checked = false;
+          const opt_id = opt1[i] + (opt2[j] ? ' > ' + opt2[j] : '') + (opt3[k] ? ' > ' + opt3[k] : '');
+          const price = 0;
+          const count = 0;
+          const displayOption = 'Y';
+          data.push({ checked, opt_id, price, count, displayOption });
+        }
+      }
+    }
+    setOptions(data);
+  };
 
   return (
     <div>
@@ -68,7 +96,9 @@ export default function AddOption() {
         </div>
       </div>
       <div className="text-center mt-4 mb-2">
-        <Button color="blue">옵션 목록 생성</Button>
+        <Button color="blue" onClick={onClick}>
+          옵션 목록 생성
+        </Button>
       </div>
     </div>
   );
