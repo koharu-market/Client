@@ -6,11 +6,12 @@ import { Option } from '../types/Option';
 
 interface Props {
   setOptions: React.Dispatch<React.SetStateAction<Option[] | undefined>>;
+  setOptionsSubject: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const splitAndTrim = (value: string) => value.split(',').map(item => item.trim());
 
-export default function AddOption({ setOptions }: Props) {
+export default function AddOption({ setOptions, setOptionsSubject }: Props) {
   const [optValue1, onChangeOptValue1] = useInput('');
   const [optItemValue1, onChangeOptItemValue1] = useInput('');
   const [optValue2, onChangeOptValue2] = useInput('');
@@ -24,11 +25,16 @@ export default function AddOption({ setOptions }: Props) {
     const opt2 = splitAndTrim(optItemValue2);
     const opt3 = splitAndTrim(optItemValue3);
 
+    const opt_1 = optValue1.trim();
+    const opt_2 = optValue2.trim();
+    const opt_3 = optValue3.trim();
+
     const opt1_count = opt1.length;
     const opt2_count = opt2.length;
     const opt3_count = opt3.length;
 
     if (optValue1 === '') return alert('옵션명과 옵션항목을 선택해주세요.');
+    const optSub = opt_1 + (opt_2 ? ',' + opt_2 : '') + (opt_3 ? ',' + opt_3 : '');
 
     for (let i = 0; i < opt1_count; i++) {
       for (let j = 0; j < opt2_count; j++) {
@@ -44,6 +50,7 @@ export default function AddOption({ setOptions }: Props) {
       }
     }
     setOptions(data);
+    setOptionsSubject(optSub);
   };
 
   return (

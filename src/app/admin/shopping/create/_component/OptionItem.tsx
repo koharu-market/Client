@@ -39,31 +39,14 @@ export default function OptionItem({ option, setOptions }: Props) {
   return (
     <tr key={option.id}>
       <td>
-        <input
-          type="checkbox"
-          defaultChecked={option.checked}
-          checked={option.checked}
-          onChange={() => handleToggle(option.id)}
-        />
+        <input type="checkbox" checked={option.checked} onChange={() => handleToggle(option.id)} />
       </td>
       <td>{option.opt_id}</td>
       <td>
-        <input
-          className="w-full"
-          type="text"
-          defaultValue={option.price}
-          value={option.price}
-          onChange={e => handleChangePrice(e, option.id)}
-        />
+        <input className="w-full" type="text" value={option.price} onChange={e => handleChangePrice(e, option.id)} />
       </td>
       <td>
-        <input
-          className="w-full"
-          type="text"
-          defaultValue={option.count}
-          value={option.count}
-          onChange={e => handleChangeCount(e, option.id)}
-        />
+        <input className="w-full" type="text" value={option.count} onChange={e => handleChangeCount(e, option.id)} />
       </td>
       <td>
         <select defaultValue={option.displayOption}>
