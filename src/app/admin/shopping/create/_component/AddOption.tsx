@@ -2,7 +2,7 @@
 
 import { useInput } from '@/hooks/useInput';
 import { Button } from '../../../_component/common/Button';
-import { Option } from '../types/option';
+import { Option } from '../types/Option';
 
 interface Props {
   setOptions: React.Dispatch<React.SetStateAction<Option[] | undefined>>;
@@ -28,14 +28,16 @@ export default function AddOption({ setOptions }: Props) {
     const opt2_count = opt2.length;
     const opt3_count = opt3.length;
 
+    if (optValue1 === '') return alert('옵션명과 옵션항목을 선택해주세요.');
+
     for (let i = 0; i < opt1_count; i++) {
       for (let j = 0; j < opt2_count; j++) {
         for (let k = 0; k < opt3_count; k++) {
           const id = `key_${i}_${j}_${k}`;
           const checked = false;
           const opt_id = opt1[i] + (opt2[j] ? ' > ' + opt2[j] : '') + (opt3[k] ? ' > ' + opt3[k] : '');
-          const price = 0;
-          const count = 0;
+          const price = '0';
+          const count = '0';
           const displayOption = 'Y';
           data.push({ id, checked, opt_id, price, count, displayOption });
         }
