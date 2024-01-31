@@ -9,7 +9,7 @@ import FileUpload from '../_component/FileUpload';
 import TableWrap from '../../_component/ui/TableWrap';
 import AddOption from './_component/AddOption';
 import OptionList from './_component/OptionList';
-import { Option } from './types/option';
+import { Option } from './types/Option';
 
 export default function CreatePage() {
   const [category, setCategory] = useState<IListBox[]>([]);
@@ -160,7 +160,7 @@ export default function CreatePage() {
                       </p>
                     </div>
                     <AddOption setOptions={setOptions} />
-                    <div className="mt-3">{options && <OptionList options={options} />}</div>
+                    <div className="mt-3">{options && <OptionList options={options} setOptions={setOptions} />}</div>
                   </td>
                 </tr>
               </tbody>

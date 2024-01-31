@@ -1,0 +1,76 @@
+'use client';
+
+import { useCallback } from 'react';
+import { Option } from '../types/Option';
+
+interface Props {
+  option: Option;
+  setOptions: React.Dispatch<React.SetStateAction<Option[] | undefined>>;
+}
+
+export default function OptionItem({ option, setOptions }: Props) {
+  const handleToggle = useCallback(
+    (id: string) => {
+      setOptions(prev => {
+        return prev?.map(option => (id === option.id ? { ...option, checked: !option.checked } : option));
+      });
+    },
+    [setOptions],
+  );
+
+  const handleChangePrice = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+      setOptions(prev => {
+        return prev?.map(option => (id === option.id ? { ...option, price: e.target.value } : option));
+      });
+    },
+    [setOptions],
+  );
+
+  const handleChangeCount = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+      setOptions(prev => {
+        return prev?.map(option => (id === option.id ? { ...option, count: e.target.value } : option));
+      });
+    },
+    [setOptions],
+  );
+
+  return (
+    <tr key={option.id}>
+      <td>
+        <input
+          type="checkbox"
+          defaultChecked={option.checked}
+          checked={option.checked}
+          onChange={() => handleToggle(option.id)}
+        />
+      </td>
+      <td>{option.opt_id}</td>
+      <td>
+        <input
+          className="w-full"
+          type="text"
+          defaultValue={option.price}
+          value={option.price}
+          onChange={e => handleChangePrice(e, option.id)}
+        />
+      </td>
+      <td>
+        <input
+          className="w-full"
+          type="text"
+          defaultValue={option.count}
+          value={option.count}
+          onChange={e => handleChangeCount(e, option.id)}
+        />
+      </td>
+      <td>
+        <select defaultValue={option.displayOption}>
+          <option value="Y">진열함</option>
+          <option value="N">진열안함</option>
+        </select>
+      </td>
+    </tr>
+  );
+}

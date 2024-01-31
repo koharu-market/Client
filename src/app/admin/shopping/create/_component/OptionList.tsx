@@ -1,11 +1,30 @@
+'use client';
+
 import TableWrap from '@/app/admin/_component/ui/TableWrap';
-import { Option } from '../types/option';
+import { Option } from '../types/Option';
+import { useCallback, useEffect, useState } from 'react';
+import OptionItem from './OptionItem';
 
 interface Props {
   options: Option[] | undefined;
+  setOptions: React.Dispatch<React.SetStateAction<Option[] | undefined>>;
 }
 
-export default function OptionList({ options }: Props) {
+export default function OptionList({ options, setOptions }: Props) {
+  const [allChecked, setAllChecked] = useState(false);
+
+  const handleToggleAll = useCallback(() => {
+    setAllChecked(prev => !prev);
+  }, []);
+
+  useEffect(() => {
+    setOptions(prev => {
+      return prev?.map(option => {
+        return { ...option, checked: allChecked };
+      });
+    });
+  }, [allChecked, setOptions]);
+
   return (
     <div>
       <TableWrap>
@@ -20,7 +39,7 @@ export default function OptionList({ options }: Props) {
           <thead>
             <tr>
               <th className="!w-auto !text-center">
-                <input type="checkbox" />
+                <input type="checkbox" checked={allChecked} onChange={handleToggleAll} />
               </th>
               <th className="!w-auto !text-center">옵션</th>
               <th className="!w-auto !text-center">추가 금액</th>
@@ -29,22 +48,7 @@ export default function OptionList({ options }: Props) {
             </tr>
           </thead>
           <tbody>
-            {options &&
-              options.map(option => (
-                <tr key={option.id}>
-                  <td>
-                    <input type="checkbox" defaultChecked={option.checked} />
-                  </td>
-                  <td>{option.opt_id}</td>
-                  <td>
-                    <input className="w-full" type="text" defaultValue={option.price} />
-                  </td>
-                  <td>
-                    <input className="w-full" type="text" defaultValue={option.count} />
-                  </td>
-                  <td>진열상태</td>
-                </tr>
-              ))}
+            {options && options.map(option => <OptionItem key={option.id} option={option} setOptions={setOptions} />)}
           </tbody>
         </table>
       </TableWrap>
