@@ -15,6 +15,7 @@ export default function CreatePage() {
   const [category, setCategory] = useState<IListBox[]>([]);
   const [categorySelected, setCategorySelected] = useState<IListBox>(category[0]);
   const [options, setOptions] = useState<Option[]>();
+  const [optionsSubject, setOptionsSubject] = useState('');
 
   useEffect(() => {
     const getCategory = async () => {
@@ -159,7 +160,7 @@ export default function CreatePage() {
                         빨,파,노]
                       </p>
                     </div>
-                    <AddOption setOptions={setOptions} />
+                    <AddOption setOptions={setOptions} setOptionsSubject={setOptionsSubject} />
                     <div className="mt-3">{options && <OptionList options={options} setOptions={setOptions} />}</div>
                   </td>
                 </tr>
