@@ -3,41 +3,47 @@
 
 import { axiosInstance } from '@/lib/axios';
 import { UploadFileInfo } from '@/types/Uploads';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AiOutlineClose, AiOutlineCamera } from 'react-icons/ai';
 
-export default function FileUpload() {
-  const [myFiles, setMyFiles] = useState<UploadFileInfo[]>([]);
+interface Props {
+  myFiles: UploadFileInfo[];
+  setMyFiles: React.Dispatch<React.SetStateAction<UploadFileInfo[]>>;
+}
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    try {
-      const formData = new FormData();
+export default function FileUpload({ myFiles, setMyFiles }: Props) {
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      try {
+        const formData = new FormData();
 
-      acceptedFiles.forEach(file => {
-        formData.append('files', file);
-      });
-
-      const response: UploadFileInfo[] = await handleUpload(formData);
-
-      if (response) {
-        setMyFiles(prevFiles => {
-          const updatedFiles = prevFiles.concat(
-            response.map(files => ({
-              path: process.env.NEXT_PUBLIC_API_URI + files.path,
-              originalname: files.originalname,
-            })),
-          );
-
-          const truncatedFiles = updatedFiles.slice(0, 5);
-
-          return truncatedFiles;
+        acceptedFiles.forEach(file => {
+          formData.append('files', file);
         });
+
+        const response: UploadFileInfo[] = await handleUpload(formData);
+
+        if (response) {
+          setMyFiles(prevFiles => {
+            const updatedFiles = prevFiles.concat(
+              response.map(files => ({
+                path: process.env.NEXT_PUBLIC_API_URI + files.path,
+                originalname: files.originalname,
+              })),
+            );
+
+            const truncatedFiles = updatedFiles.slice(0, 5);
+
+            return truncatedFiles;
+          });
+        }
+      } catch (error) {
+        console.error('Error handling drop:', error);
       }
-    } catch (error) {
-      console.error('Error handling drop:', error);
-    }
-  }, []);
+    },
+    [setMyFiles],
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,

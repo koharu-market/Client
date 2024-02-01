@@ -6,12 +6,12 @@ import { Option } from '../types/Option';
 
 interface Props {
   setOptions: React.Dispatch<React.SetStateAction<Option[] | undefined>>;
-  setOptionsSubject: React.Dispatch<React.SetStateAction<string>>;
+  setOptionSubject: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const splitAndTrim = (value: string) => value.split(',').map(item => item.trim());
 
-export default function AddOption({ setOptions, setOptionsSubject }: Props) {
+export default function AddOption({ setOptions, setOptionSubject }: Props) {
   const [optValue1, onChangeOptValue1] = useInput('');
   const [optItemValue1, onChangeOptItemValue1] = useInput('');
   const [optValue2, onChangeOptValue2] = useInput('');
@@ -41,16 +41,16 @@ export default function AddOption({ setOptions, setOptionsSubject }: Props) {
         for (let k = 0; k < opt3_count; k++) {
           const id = `key_${i}_${j}_${k}`;
           const checked = false;
-          const opt_id = opt1[i] + (opt2[j] ? ' > ' + opt2[j] : '') + (opt3[k] ? ' > ' + opt3[k] : '');
+          const name = opt1[i] + (opt2[j] ? ' > ' + opt2[j] : '') + (opt3[k] ? ' > ' + opt3[k] : '');
           const price = '0';
           const count = '0';
           const displayOption = 'Y';
-          data.push({ id, checked, opt_id, price, count, displayOption });
+          data.push({ id, checked, name, price, count, displayOption });
         }
       }
     }
     setOptions(data);
-    setOptionsSubject(optSub);
+    setOptionSubject(optSub);
   };
 
   return (
