@@ -1,7 +1,7 @@
 'use client';
 import ListBox from '@/components/common/ListBox';
 import Header from '../../_component/ui/Header';
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ListBox as IListBox } from '@/types/ListBox';
 import { axiosInstance } from '@/lib/axios';
 import Editor from '../_component/Editor';
@@ -12,6 +12,7 @@ import OptionList from './_component/OptionList';
 import { Option } from './types/Option';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button } from '../../_component/common/Button';
+import { UploadFileInfo } from '@/types/Uploads';
 
 interface FormData {
   name: string;
@@ -31,7 +32,9 @@ export default function CreatePage() {
   const [category, setCategory] = useState<IListBox[]>([]);
   const [categorySelected, setCategorySelected] = useState<IListBox>(category[0]);
   const [options, setOptions] = useState<Option[]>();
-  const [optionsSubject, setOptionsSubject] = useState('');
+  const [optionSubject, setOptionSubject] = useState('');
+  const [content, setContent] = useState('');
+  const [myFiles, setMyFiles] = useState<UploadFileInfo[]>([]);
   const {
     register,
     handleSubmit,
@@ -65,25 +68,31 @@ export default function CreatePage() {
 
   const onSubmit: SubmitHandler<FormData> = async data => {
     console.log(data);
+    const files: { [key: string]: string } = {};
+
+    myFiles.forEach((item, index) => {
+      files[`img${index + 1}`] = item.path;
+    });
+
     const productData = {
       ...data,
       categoryId: categorySelected.id,
-      optionSubject: optionsSubject,
-      content: 'hihi',
-      img1: 'hihi',
+      optionSubject,
+      content,
+      ...files,
       seoTitle: data.name,
     };
     const newProduct = await axiosInstance.post('/admin/product', productData);
 
-    console.log(newProduct);
+    // const productOptionData = options?.map(item => {
+    //   const { id, checked, ...rest } = item;
+    //   return {
+    //     ...rest,
+    //     productId: newProduct.data.id,
+    //   };
+    // });
 
-    // const productOptionData = {
-    //   productId: newProduct.id,
-    //   ...options,
-    // };
-    // await axiosInstance.post('/admin/productOption');
-
-    // console.log(res);
+    // await axiosInstance.post('/admin/productOption', productOptionData);
   };
 
   return (
@@ -164,14 +173,14 @@ export default function CreatePage() {
                   <tr>
                     <th>상세 설명</th>
                     <td>
-                      <Editor />
+                      <Editor content={content} setContent={setContent} />
                     </td>
                   </tr>
                   <tr>
                     <th>대표 이미지</th>
                     <td>
                       <div>
-                        <FileUpload />
+                        <FileUpload myFiles={myFiles} setMyFiles={setMyFiles} />
                       </div>
                     </td>
                   </tr>
@@ -285,7 +294,7 @@ export default function CreatePage() {
                           : 빨,파,노]
                         </p>
                       </div>
-                      <AddOption setOptions={setOptions} setOptionsSubject={setOptionsSubject} />
+                      <AddOption setOptions={setOptions} setOptionSubject={setOptionSubject} />
                       <div className="mt-3">{options && <OptionList options={options} setOptions={setOptions} />}</div>
                     </td>
                   </tr>
