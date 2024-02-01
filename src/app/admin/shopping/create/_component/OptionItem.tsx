@@ -21,7 +21,7 @@ export default function OptionItem({ option, setOptions }: Props) {
   const handleChangePrice = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
       setOptions(prev => {
-        return prev?.map(option => (id === option.id ? { ...option, price: e.target.value } : option));
+        return prev?.map(option => (id === option.id ? { ...option, price: parseInt(e.target.value) } : option));
       });
     },
     [setOptions],
@@ -30,7 +30,7 @@ export default function OptionItem({ option, setOptions }: Props) {
   const handleChangeCount = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
       setOptions(prev => {
-        return prev?.map(option => (id === option.id ? { ...option, count: e.target.value } : option));
+        return prev?.map(option => (id === option.id ? { ...option, count: parseInt(e.target.value) } : option));
       });
     },
     [setOptions],
@@ -41,7 +41,7 @@ export default function OptionItem({ option, setOptions }: Props) {
       <td>
         <input type="checkbox" checked={option.checked} onChange={() => handleToggle(option.id)} />
       </td>
-      <td>{option.name}</td>
+      <td>{option.name.replaceAll(String.fromCharCode(30), ' > ')}</td>
       <td>
         <input className="w-full" type="text" value={option.price} onChange={e => handleChangePrice(e, option.id)} />
       </td>

@@ -41,11 +41,15 @@ export default function AddOption({ setOptions, setOptionSubject }: Props) {
         for (let k = 0; k < opt3_count; k++) {
           const id = `key_${i}_${j}_${k}`;
           const checked = false;
-          const name = opt1[i] + (opt2[j] ? ' > ' + opt2[j] : '') + (opt3[k] ? ' > ' + opt3[k] : '');
-          const price = '0';
-          const count = '0';
+          const name =
+            opt1[i] +
+            (opt2[j] ? String.fromCharCode(30) + opt2[j] : '') +
+            (opt3[k] ? String.fromCharCode(30) + opt3[k] : '');
+          const price = 0;
+          const count = 0;
           const displayOption = 'Y';
-          data.push({ id, checked, name, price, count, displayOption });
+          const type = 0;
+          data.push({ id, checked, name, price, count, displayOption, type });
         }
       }
     }
