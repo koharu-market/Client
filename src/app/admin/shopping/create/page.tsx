@@ -84,15 +84,17 @@ export default function CreatePage() {
     };
     const newProduct = await axiosInstance.post('/admin/product', productData);
 
-    // const productOptionData = options?.map(item => {
-    //   const { id, checked, ...rest } = item;
-    //   return {
-    //     ...rest,
-    //     productId: newProduct.data.id,
-    //   };
-    // });
+    const productOptionData = options?.map(item => {
+      const { id, checked, ...rest } = item;
+      return {
+        ...rest,
+        productId: newProduct.data.id,
+      };
+    });
 
-    // await axiosInstance.post('/admin/productOption', productOptionData);
+    if (productOptionData) {
+      await axiosInstance.post('/admin/productOption', productOptionData);
+    }
   };
 
   return (
