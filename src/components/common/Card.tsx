@@ -1,6 +1,6 @@
 import { Product } from '@/types/Product';
 import Image from 'next/image';
-import Rating from './Rating';
+import Score from './Score';
 import Link from 'next/link';
 import calculateDiscountRate from '@/lib/calculateDiscountRate';
 
@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default function Card({ product }: Props) {
+  // console.log(product.price &&product.price > product.sale ? true : false);
   return (
     <Link key={product.id} href={`/products/${product.id}`} className="group">
       <div className="relative w-full pt-[100%] overflow-hidden rounded bg-gray-200">
@@ -16,7 +17,7 @@ export default function Card({ product }: Props) {
           fill
           priority
           sizes="(max-width: 480px) 480px, 600px"
-          src={product.image}
+          src={product.img1}
           alt={product.name}
           style={{ objectFit: 'cover' }}
           className="group-hover:opacity-75"
@@ -26,13 +27,13 @@ export default function Card({ product }: Props) {
         <span className="text-sm text-gray-700 ">{product.name}</span>
       </div>
       <p className="mt-1">
-        {product.price !== product.sale && (
+        {typeof product.price === 'number' && product.price > product.sale && (
           <span className="font-medium mr-1 text-red-600">{calculateDiscountRate(product.price, product.sale)}%</span>
         )}
         <span className="font-medium text-gray-900">{product.sale.toLocaleString('ko-KR')}</span>
         <span className="text-sm ml-[2px]">원</span>
       </p>
-      <Rating product={product} />
+      <Score product={product} />
     </Link>
   );
 }

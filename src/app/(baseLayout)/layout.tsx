@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default async function BaseLayout({ children }: Props) {
-  const response = await axiosInstance.get('/product/categories');
+  const response = await axiosInstance.get('/category');
   const data = response.data;
   return <Layout categories={data}>{children}</Layout>;
 }

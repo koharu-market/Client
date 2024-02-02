@@ -1,4 +1,4 @@
-import Rating from '@/components/common/Rating';
+import Rating from '@/components/common/Score';
 import calculateDiscountRate from '@/lib/calculateDiscountRate';
 import { Product } from '@/types/Product';
 
