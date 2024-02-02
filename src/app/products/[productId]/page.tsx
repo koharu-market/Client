@@ -18,7 +18,7 @@ export default async function ProductDetailPage({ params }: Props) {
     <main className="container pb-20">
       <ProductInfo product={product} />
       <Tabs />
-      <ProductDetail />
+      <ProductDetail content={product.content} />
     </main>
   );
 }
