@@ -2,11 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
-
-interface Option {
-  value: string;
-  label: string;
-}
+import { Option } from '../../_types/Option';
 
 interface Props {
   options: Option[];
@@ -45,7 +41,7 @@ export default function Select({ options, onChange, value }: Props) {
           onClick={() => setIsOpen(!isOpen)}
         >
           <div className="flex items-center justify-between">
-            <div>{options.find(option => option.value === value)?.label || '옵션을 선택하세요.'}</div>
+            <div>{options.find(option => option.name === value)?.name || '옵션을 선택하세요.'}</div>
             <IoIosArrowDown className={`text-gray-500 ${isOpen ? 'transform rotate-180' : ''}`} />
           </div>
         </div>
@@ -55,11 +51,11 @@ export default function Select({ options, onChange, value }: Props) {
           <div className="py-1">
             {options.map(option => (
               <div
-                key={option.value}
+                key={option.name}
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
-                onClick={() => handleOptionClick(option.value)}
+                onClick={() => handleOptionClick(option.name)}
               >
-                {option.label}
+                {option.name}
               </div>
             ))}
           </div>

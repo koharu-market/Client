@@ -1,21 +1,13 @@
 'use client';
 
-import { Product, ProductDetail } from '@/types/Product';
+import { ProductDetail } from '@/types/Product';
 import Buttons from './Buttons';
 import Select from '../common/Select';
 import SellingOption from '../common/SellingOption';
 import TotalPrice from '../common/TotalPrice';
-
-// interface Option {
-//   value: string;
-//   label: string;
-// }
-
-// const options: Option[] = [
-//   { value: 'option1', label: 'Option 1' },
-//   { value: 'option2', label: 'Option 2' },
-//   { value: 'option3', label: 'Option 3' },
-// ];
+import { useEffect, useState } from 'react';
+import { axiosInstance } from '@/lib/axios';
+import { Option } from '../../_types/Option';
 
 interface Props {
   product: ProductDetail;
@@ -24,19 +16,30 @@ interface Props {
 }
 
 export default function PurchaseInfo({ product, count, setCount }: Props) {
-  // const [selectedOption, setSelectedOption] = useState<null | Option['value']>(null);
+  const [optionsSubject, setOptionsSubject] = useState([]);
+  const [options, setOptions] = useState([]);
+  const [selectedOption, setSelectedOption] = useState<null | Option['name']>(null);
 
-  // const handleSelectChange = (selectedValue: string) => {
-  //   setSelectedOption(selectedValue);
-  // };
+  const handleSelectChange = (selectedValue: string) => {
+    setSelectedOption(selectedValue);
+  };
+
+  useEffect(() => {
+    async function getOptions() {
+      const response = await axiosInstance.get(`/product/${product.id}/options`);
+      const data = response.data;
+      console.log(data);
+    }
+    getOptions();
+  }, [product.id]);
   return (
     <div>
-      {/* <div>
+      <div>
         <span className="font-semibold">옵션 선택</span>
       </div>
       <div className="mt-4">
         <Select options={options} onChange={handleSelectChange} value={selectedOption} />
-      </div> */}
+      </div>
       <div>
         <SellingOption name={product.name} sale={product.sale} count={count} setCount={setCount} />
       </div>
