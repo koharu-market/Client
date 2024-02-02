@@ -1,9 +1,9 @@
 import Rating from '@/components/common/Score';
 import calculateDiscountRate from '@/lib/calculateDiscountRate';
-import { Product } from '@/types/Product';
+import { ProductDetail } from '@/types/Product';
 
 interface Props {
-  product: Product;
+  product: ProductDetail;
 }
 
 export default function ProductDetails({ product }: Props) {
@@ -16,7 +16,7 @@ export default function ProductDetails({ product }: Props) {
         </a>
       </div>
       <div className="md:mt-2">
-        {product.price === 0 ? (
+        {product.type4 === 'N' ? (
           <>
             <span className="md:text-3xl text-xl font-semibold">
               {product.sale.toLocaleString('ko-KR')}

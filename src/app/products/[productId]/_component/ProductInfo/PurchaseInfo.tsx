@@ -1,6 +1,6 @@
 'use client';
 
-import { Product } from '@/types/Product';
+import { Product, ProductDetail } from '@/types/Product';
 import Buttons from './Buttons';
 import Select from '../common/Select';
 import SellingOption from '../common/SellingOption';
@@ -18,7 +18,7 @@ import TotalPrice from '../common/TotalPrice';
 // ];
 
 interface Props {
-  product: Product;
+  product: ProductDetail;
   count: number;
   setCount: React.Dispatch<React.SetStateAction<number>>;
 }

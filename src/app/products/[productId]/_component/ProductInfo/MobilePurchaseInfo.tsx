@@ -2,13 +2,13 @@
 
 import Modal from '@/components/common/Modal';
 import SellingOption from '../common/SellingOption';
-import { Product } from '@/types/Product';
+import { ProductDetail } from '@/types/Product';
 import TotalPrice from '../common/TotalPrice';
 
 interface Props {
   isOpen: boolean;
   closeModal: () => void;
-  product: Product;
+  product: ProductDetail;
   count: number;
   setCount: React.Dispatch<React.SetStateAction<number>>;
 }

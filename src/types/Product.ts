@@ -4,6 +4,7 @@ export interface Product {
   name: string;
   price: number;
   sale: number;
+  type4: YNType; // 할인상품
   score?: number;
   reviewCount?: number;
 }
@@ -20,15 +21,18 @@ export interface ProductDetail {
   count: number;
   deleted: YNType;
   img1: string;
-  // id: number;
-  // name: string;
-  // description: string;
-  // count: number;
-  // price: number;
-  // sale: number;
-  // image1: string;
-  // image2?: string;
-  // image3?: string;
-  // image4?: string;
-  // image5?: string;
+  img2?: string;
+  img3?: string;
+  img4?: string;
+  img5?: string;
+  seoTitle: string;
+  buyMinCount: number;
+  buyMaxCount: number;
+  displayOption: YNType;
+  type1: YNType; // 추천상품
+  type2: YNType; // 신상품
+  type3: YNType; // 인기상품
+  type4: YNType; // 할인상품
+  optionSubject?: string;
+  supplySubject?: string;
 }

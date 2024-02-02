@@ -6,19 +6,23 @@ import Review from './Review';
 import Question from './Question';
 import Delivery from './Delivery';
 
-export default function ProductDetail() {
+interface Props {
+  content: string;
+}
+
+export default function ProductDetail({ content }: Props) {
   return (
     <div>
-      <Element name="tab1" className="h-[1200px]">
-        <Info />
+      <Element name="tab1">
+        <Info content={content} />
       </Element>
-      <Element name="tab2" className="h-[1200px]">
+      <Element name="tab2">
         <Review />
       </Element>
-      <Element name="tab3" className="h-[1200px]">
+      <Element name="tab3">
         <Question />
       </Element>
-      <Element name="tab4" className="h-[1200px]">
+      <Element name="tab4">
         <Delivery />
       </Element>
     </div>

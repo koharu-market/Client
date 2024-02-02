@@ -1,6 +1,6 @@
 'use client';
 
-import { Product } from '@/types/Product';
+import { ProductDetail } from '@/types/Product';
 import ProductImage from './ProductImage';
 import ProductDetails from './ProductDetails';
 import PurchaseInfo from './PurchaseInfo';
@@ -9,7 +9,7 @@ import MobilePurchaseInfo from './MobilePurchaseInfo';
 import MobilePurchaseButton from './MobilePurchaseButton';
 
 interface Props {
-  product: Product;
+  product: ProductDetail;
 }
 
 export default function ProductInfo({ product }: Props) {
