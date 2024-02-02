@@ -16,7 +16,7 @@ export default function ProductDetails({ product }: Props) {
         </a>
       </div>
       <div className="md:mt-2">
-        {product.price === product.sale ? (
+        {product.price === 0 ? (
           <>
             <span className="md:text-3xl text-xl font-semibold">
               {product.sale.toLocaleString('ko-KR')}
@@ -28,6 +28,7 @@ export default function ProductDetails({ product }: Props) {
             <span className="md:text-3xl text-xl font-semibold mr-2 text-red-600">
               {calculateDiscountRate(product.price, product.sale)}%
             </span>
+
             <span className="md:text-3xl text-xl font-semibold">
               {product.sale.toLocaleString('ko-KR')}
               <span className="font-normal">원</span>

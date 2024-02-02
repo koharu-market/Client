@@ -28,7 +28,7 @@ export default function ProductInfo({ product }: Props) {
     <div className="md:flex">
       <div className="md:w-6/12">
         <div className="md:mr-14">
-          <ProductImage src={product.image} alt={product.name} />
+          <ProductImage src={product.img1} alt={product.name} />
         </div>
       </div>
       <div className="md:flex-1 md:mt-0 mt-5">

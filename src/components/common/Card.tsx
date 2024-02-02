@@ -9,7 +9,6 @@ interface Props {
 }
 
 export default function Card({ product }: Props) {
-  // console.log(product.price &&product.price > product.sale ? true : false);
   return (
     <Link key={product.id} href={`/products/${product.id}`} className="group">
       <div className="relative w-full pt-[100%] overflow-hidden rounded bg-gray-200">
@@ -27,7 +26,7 @@ export default function Card({ product }: Props) {
         <span className="text-sm text-gray-700 ">{product.name}</span>
       </div>
       <p className="mt-1">
-        {typeof product.price === 'number' && product.price > product.sale && (
+        {product.price > product.sale && (
           <span className="font-medium mr-1 text-red-600">{calculateDiscountRate(product.price, product.sale)}%</span>
         )}
         <span className="font-medium text-gray-900">{product.sale.toLocaleString('ko-KR')}</span>

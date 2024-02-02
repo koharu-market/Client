@@ -1,7 +1,7 @@
-import { allData } from '@/data/dummy/product';
 import ProductInfo from './_component/ProductInfo';
 import Tabs from './_component/common/Tabs';
 import ProductDetail from './_component/ProductDetail';
+import { getProduct } from './_lib/getProduct';
 
 interface Props {
   params: {
@@ -9,9 +9,9 @@ interface Props {
   };
 }
 
-export default function ProductDetailPage({ params }: Props) {
+export default async function ProductDetailPage({ params }: Props) {
   const { productId } = params;
-  const product = allData.find(product => product.id === Number(productId));
+  const product = await getProduct(productId);
 
   if (!product) return <div>해당 상품이 없습니다.</div>;
   return (
