@@ -1,11 +1,11 @@
 export interface Product {
   id: number;
-  image: string;
+  img1: string;
   name: string;
-  price: number;
-  rating: number;
+  price?: number;
   sale: number;
-  reviewCount: number;
+  score?: number;
+  reviewCount?: number;
 }
 
 export interface ProductDetail {
