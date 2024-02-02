@@ -13,6 +13,7 @@ import { Option } from './types/Option';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button } from '../../_component/common/Button';
 import { UploadFileInfo } from '@/types/Uploads';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
   name: string;
@@ -35,6 +36,7 @@ export default function CreatePage() {
   const [optionSubject, setOptionSubject] = useState('');
   const [content, setContent] = useState('');
   const [myFiles, setMyFiles] = useState<UploadFileInfo[]>([]);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -61,39 +63,49 @@ export default function CreatePage() {
       const response = await axiosInstance.get('/product/category');
       const data = response.data;
       setCategory(data);
+      if (!data[0]) {
+        alert('카테고리를 생성해주세요.');
+        return router.push('/admin/shopping/category');
+      }
       setCategorySelected(data[0]);
     };
     getCategory();
-  }, []);
+  }, [router]);
 
-  const onSubmit: SubmitHandler<FormData> = async data => {
-    console.log(data);
-    const files: { [key: string]: string } = {};
+  const onSubmit: SubmitHandler<FormData> = async formData => {
+    try {
+      const files: { [key: string]: string } = {};
 
-    myFiles.forEach((item, index) => {
-      files[`img${index + 1}`] = item.path;
-    });
+      myFiles.forEach((file, index) => {
+        files[`img${index + 1}`] = file.path;
+      });
 
-    const productData = {
-      ...data,
-      categoryId: categorySelected.id,
-      optionSubject,
-      content,
-      ...files,
-      seoTitle: data.name,
-    };
-    const newProduct = await axiosInstance.post('/admin/product', productData);
-
-    const productOptionData = options?.map(item => {
-      const { id, checked, ...rest } = item;
-      return {
-        ...rest,
-        productId: newProduct.data.id,
+      const productData = {
+        ...formData,
+        categoryId: categorySelected.id,
+        optionSubject,
+        content,
+        ...files,
+        seoTitle: formData.name,
       };
-    });
+      const newProductResponse = await axiosInstance.post('/admin/product', productData);
 
-    if (productOptionData) {
-      await axiosInstance.post('/admin/productOption', productOptionData);
+      const productOptionData = options?.map(item => {
+        const { id, checked, ...rest } = item;
+        return {
+          ...rest,
+          productId: newProductResponse.data.id,
+        };
+      });
+
+      if (productOptionData) {
+        await axiosInstance.post('/admin/productOption', productOptionData);
+      }
+
+      alert('등록이 완료되었습니다.');
+      router.push('/admin/shopping');
+    } catch (error) {
+      console.error(error);
     }
   };
 
