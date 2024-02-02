@@ -1,0 +1,1 @@
+type YNType = 'Y' | 'N';
