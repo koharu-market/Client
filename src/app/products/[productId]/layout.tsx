@@ -1,12 +1,15 @@
 import Category from '@/app/(baseLayout)/_component/layout/Header/Category';
 import HeaderNavbar from '@/app/(baseLayout)/_component/layout/Header/HeaderNavbar';
 import MobileHeaderNavbar from '@/components/layout/MobileHeaderNavbar';
+import { axiosInstance } from '@/lib/axios';
 
 interface Props {
   children: React.ReactNode;
 }
 
-export default function BaseLayout({ children }: Props) {
+export default async function BaseLayout({ children }: Props) {
+  const response = await axiosInstance.get('/category');
+  const categories = response.data;
   return (
     <div className="h-screen flex flex-col">
       <header className="border-b">
@@ -16,7 +19,7 @@ export default function BaseLayout({ children }: Props) {
           </div>
           <MobileHeaderNavbar />
           <div className="hidden md:block">
-            <Category />
+            <Category categories={categories} />
           </div>
         </div>
       </header>

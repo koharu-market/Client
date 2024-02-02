@@ -2,14 +2,14 @@
 
 import { Categories } from '@/types/Categories';
 import Link from 'next/link';
-import { useSelectedLayoutSegments } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 interface Props {
   categories: Categories[];
 }
 
 export default function Category({ categories }: Props) {
-  const segments = useSelectedLayoutSegments();
+  const pathname = usePathname();
 
   return (
     <nav className="px-2 md:px-0">
@@ -18,7 +18,7 @@ export default function Category({ categories }: Props) {
           <Link href={`/`} className="block md:py-3 py-1.5 md:px-2 px-3 md:text-lg whitespace-nowrap">
             홈
           </Link>
-          {segments.length === 0 && (
+          {pathname === '/' && (
             <span className="block md:w-full w-[calc(100%-1rem)] mx-auto h-0.5 bg-black mt-3 absolute bottom-0 right-0 left-0"></span>
           )}
         </li>
@@ -31,7 +31,7 @@ export default function Category({ categories }: Props) {
               >
                 {item.name}
               </Link>
-              {item.id.toString() === segments[1] && (
+              {pathname === `/categories/${item.id}` && (
                 <span className="block md:w-full w-[calc(100%-1rem)] mx-auto h-0.5 bg-black mt-3 absolute bottom-0 right-0 left-0"></span>
               )}
             </li>
