@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: 'image.idus.com',
         pathname: '**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '**',
+      },
     ],
   },
 };
