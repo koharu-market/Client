@@ -13,6 +13,7 @@ interface Props {
 }
 
 export default function ProductInfo({ product }: Props) {
+  console.log(product);
   const [count, setCount] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,7 +29,7 @@ export default function ProductInfo({ product }: Props) {
     <div className="md:flex">
       <div className="md:w-6/12">
         <div className="md:mr-14">
-          <ProductImage src={product.img1} alt={product.name} />
+          <ProductImage images={product.images} name={product.name} />
         </div>
       </div>
       <div className="md:flex-1 md:mt-0 mt-5">

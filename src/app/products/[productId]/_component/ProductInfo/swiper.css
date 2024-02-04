@@ -1,0 +1,9 @@
+.swiper .swiper-pagination {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.swiper .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: 1;
+}

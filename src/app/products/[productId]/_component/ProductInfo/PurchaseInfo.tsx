@@ -7,7 +7,7 @@ import SellingOption from '../ui/SellingOption';
 import TotalPrice from '../ui/TotalPrice';
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '@/lib/axios';
-import { Option } from '../../_types/Option';
+import { Option } from '../../../../../types/Option';
 
 interface Props {
   product: ProductDetail;

@@ -20,11 +20,12 @@ export interface ProductDetail {
   updatedAt: Date;
   count: number;
   deleted: YNType;
-  img1: string;
-  img2?: string;
-  img3?: string;
-  img4?: string;
-  img5?: string;
+  images: string[];
+  // img1: string;
+  // img2?: string;
+  // img3?: string;
+  // img4?: string;
+  // img5?: string;
   seoTitle: string;
   buyMinCount: number;
   buyMaxCount: number;

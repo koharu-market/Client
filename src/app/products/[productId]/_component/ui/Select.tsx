@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
-import { Option } from '../../_types/Option';
+import { Option } from '../../../../../types/Option';
 
 interface Props {
   options: Option[];
