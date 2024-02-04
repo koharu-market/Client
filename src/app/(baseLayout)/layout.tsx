@@ -1,5 +1,8 @@
-import Layout from './_component/layout';
+import Layout from '@/components/layout';
+import Header from '@/components/layout/Header';
+import Main from '@/components/layout/Main';
 import { getCategories } from '@/lib/getCategories';
+import Footer from './_component/layout/Footer';
 
 interface Props {
   children: React.ReactNode;
@@ -7,5 +10,13 @@ interface Props {
 
 export default async function BaseLayout({ children }: Props) {
   const categories = await getCategories();
-  return <Layout categories={categories}>{children}</Layout>;
+  return (
+    <Layout>
+      <header>
+        <Header categories={categories} />
+      </header>
+      <Main>{children}</Main>
+      <Footer />
+    </Layout>
+  );
 }
