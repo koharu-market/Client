@@ -1,10 +1,11 @@
 import { Product } from '@/types/Product';
 
 interface Props {
-  product: Product;
+  score?: number;
+  reviewCount?: number;
 }
 
-export default function Score({ product }: Props) {
+export default function Score({ score, reviewCount }: Props) {
   return (
     <div className="mt-1 inline-flex items-center gap-2">
       <span
@@ -19,12 +20,12 @@ export default function Score({ product }: Props) {
             backgroundImage: `url('/score.png')`,
             backgroundSize: '70px',
             backgroundPositionY: '-17px',
-            width: `${product.score}%`,
+            width: `${score}%`,
           }}
           className={`bg-no-repeat inline-block h-4 absolute`}
         ></span>
       </span>
-      <span className="text-xs text-slate-400">({product.reviewCount ? product.reviewCount : 0})</span>
+      <span className="text-xs text-slate-400">({reviewCount ? reviewCount : 0})</span>
     </div>
   );
 }

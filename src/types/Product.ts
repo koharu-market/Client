@@ -5,8 +5,8 @@ export interface Product {
   price: number;
   sale: number;
   type4: YNType; // 할인상품
-  score?: number;
-  reviewCount?: number;
+  score: number;
+  reviewCount: number;
 }
 
 export interface ProductDetail {
@@ -21,11 +21,6 @@ export interface ProductDetail {
   count: number;
   deleted: YNType;
   images: string[];
-  // img1: string;
-  // img2?: string;
-  // img3?: string;
-  // img4?: string;
-  // img5?: string;
   seoTitle: string;
   buyMinCount: number;
   buyMaxCount: number;
@@ -36,4 +31,6 @@ export interface ProductDetail {
   type4: YNType; // 할인상품
   optionSubject?: string;
   supplySubject?: string;
+  score: number;
+  reviewCount: number;
 }

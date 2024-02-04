@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Keyboard, Pagination, FreeMode, Thumbs } from 'swiper/modules';
 import { useState } from 'react';
+import SwiperCore from 'swiper';
 
 import './swiper.css';
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export default function ProductImage({ images, name }: Props) {
-  const [thumbsSwiper, setThumbsSwiper] = useState<Swiper | null>(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
 
   return (
     <div>

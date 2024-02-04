@@ -1,6 +1,6 @@
-import { home } from '@/data/dummy/product/home';
 import ProductList from './_component/ui/ProductList';
 
 export default function Home() {
-  return <ProductList products={home} />;
+  // return <ProductList products={home} />;
+  return <div>홈</div>;
 }

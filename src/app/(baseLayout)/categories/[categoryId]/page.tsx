@@ -1,6 +1,5 @@
-import { axiosInstance } from '@/lib/axios';
 import ProductList from '../../_component/ui/ProductList';
-import { getCategory } from '../_lib/getCategory';
+import { getCategory } from './_lib/getCategory';
 
 interface Props {
   params: {

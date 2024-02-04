@@ -32,7 +32,7 @@ export default function Card({ product }: Props) {
         <span className="font-medium text-gray-900">{product.sale.toLocaleString('ko-KR')}</span>
         <span className="text-sm ml-[2px]">원</span>
       </p>
-      <Score product={product} />
+      <Score score={product.score} reviewCount={product.reviewCount} />
     </Link>
   );
 }

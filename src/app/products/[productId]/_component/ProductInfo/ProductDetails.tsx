@@ -12,7 +12,7 @@ export default function ProductDetails({ product }: Props) {
       <h2 className="md:text-2xl text-lg font-medium">{product.name}</h2>
       <div className="mt-1">
         <a href="#rating">
-          <Rating product={product} />
+          <Rating score={product.score} reviewCount={product.reviewCount} />
         </a>
       </div>
       <div className="md:mt-2">
