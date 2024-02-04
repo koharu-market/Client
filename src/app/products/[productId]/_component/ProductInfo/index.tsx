@@ -13,7 +13,6 @@ interface Props {
 }
 
 export default function ProductInfo({ product }: Props) {
-  console.log(product);
   const [count, setCount] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
 
