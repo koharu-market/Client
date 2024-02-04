@@ -60,7 +60,7 @@ export default function CreatePage() {
 
   useEffect(() => {
     const getCategory = async () => {
-      const response = await axiosInstance.get('/product/category');
+      const response = await axiosInstance.get('/category');
       const data = response.data;
       setCategory(data);
       if (!data[0]) {
