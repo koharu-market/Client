@@ -2,9 +2,9 @@
 
 import { ProductDetail } from '@/types/Product';
 import Buttons from './Buttons';
-import Select from '../common/Select';
-import SellingOption from '../common/SellingOption';
-import TotalPrice from '../common/TotalPrice';
+import Select from '../ui/Select';
+import SellingOption from '../ui/SellingOption';
+import TotalPrice from '../ui/TotalPrice';
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '@/lib/axios';
 import { Option } from '../../_types/Option';

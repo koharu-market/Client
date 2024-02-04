@@ -2,6 +2,7 @@
 
 import { responsive } from '@/data/responsive';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { BsCart2 } from 'react-icons/bs';
 import { IoChevronBack } from 'react-icons/io5';
 import { useMediaQuery } from 'react-responsive';
@@ -9,8 +10,13 @@ import { useMediaQuery } from 'react-responsive';
 export default function MobileHeaderNavbar() {
   const router = useRouter();
   const isTablet = useMediaQuery({ maxWidth: responsive.tablet });
+  const [tablet, setTablet] = useState(false);
 
-  if (!isTablet) return null;
+  useEffect(() => {
+    setTablet(isTablet);
+  }, [isTablet]);
+
+  if (!tablet) return null;
   return (
     <div className="sticky z-50 md:h-24 h-[60px]">
       <div className="fixed md:container w-full left-0 right-0">

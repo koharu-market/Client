@@ -1,7 +1,7 @@
 'use client';
 
-import Card from '@/components/common/Card';
-import CardList from '@/components/common/CardList';
+import Card from '@/app/(baseLayout)/_component/ui/Card';
+import CardList from '@/app/(baseLayout)/_component/ui/CardList';
 import ListBox from '@/components/common/ListBox';
 import useCategoryFilter from '@/hooks/useCategoryFilter';
 import { sortingOptions } from '@/data/sortingOptions';

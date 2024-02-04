@@ -5,11 +5,11 @@ import { IoMdHeartEmpty, IoMdHeart, IoMdSearch } from 'react-icons/io';
 import { IoHomeOutline, IoHomeSharp } from 'react-icons/io5';
 import { useRouter, useSelectedLayoutSegment } from 'next/navigation';
 
-export default function MobileMenubar() {
+export default function MobileFooterMenubar() {
   const segment = useSelectedLayoutSegment();
   const router = useRouter();
   return (
-    <div>
+    <div className="fixed bottom-0 block w-full md:hidden">
       <nav>
         <ul className="flex justify-around bg-primary-200 items-center pt-2.5 pb-1.5">
           <li>

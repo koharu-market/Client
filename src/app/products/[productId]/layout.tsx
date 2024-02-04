@@ -1,6 +1,6 @@
 import Category from '@/app/(baseLayout)/_component/layout/Header/Category';
 import HeaderNavbar from '@/app/(baseLayout)/_component/layout/Header/HeaderNavbar';
-import MobileHeaderNavbar from '@/components/layout/MobileHeaderNavbar';
+import MobileHeaderNavbar from '@/app/products/[productId]/_component/layout/MobileHeaderNavbar';
 import { getCategories } from '@/lib/getCategories';
 
 interface Props {
@@ -15,11 +15,9 @@ export default async function BaseLayout({ children }: Props) {
         <div className="md:container">
           <div className="md:block hidden">
             <HeaderNavbar />
-          </div>
-          <MobileHeaderNavbar />
-          <div className="hidden md:block">
             <Category categories={categories} />
           </div>
+          <MobileHeaderNavbar />
         </div>
       </header>
       <div className="flex-1">{children}</div>

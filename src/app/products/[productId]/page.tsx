@@ -1,5 +1,5 @@
 import ProductInfo from './_component/ProductInfo';
-import Tabs from './_component/common/Tabs';
+import Tabs from './_component/ui/Tabs';
 import ProductDetail from './_component/ProductDetail';
 import { getProduct } from './_lib/getProduct';
 

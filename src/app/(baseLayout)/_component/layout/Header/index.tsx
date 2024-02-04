@@ -8,11 +8,11 @@ interface Props {
 
 export default function Header({ categories }: Props) {
   return (
-    <header className="border-b">
+    <div className="border-b">
       <div className="md:container">
         <HeaderNavbar />
         <Category categories={categories} />
       </div>
-    </header>
+    </div>
   );
 }
