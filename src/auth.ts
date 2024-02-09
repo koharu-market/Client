@@ -10,6 +10,7 @@ export const {
   pages: {
     signIn: '/login',
   },
+  trustHost: true,
   providers: [
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,

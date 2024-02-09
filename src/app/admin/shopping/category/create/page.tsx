@@ -8,7 +8,6 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 interface FormData {
   name: string;
-  engName: string;
   order: string;
   displayOption: string;
 }
@@ -22,7 +21,6 @@ export default function CreateCategoryPage() {
   } = useForm({
     defaultValues: {
       name: '',
-      engName: '',
       order: '0',
       displayOption: 'Y',
     },
@@ -49,13 +47,6 @@ export default function CreateCategoryPage() {
                   <td>
                     <input type="text" required {...register('name', { required: true })} />
                     {errors.name && <p className="error">분류명은 필수값입니다.</p>}
-                  </td>
-                </tr>
-                <tr>
-                  <th>영어 분류명</th>
-                  <td>
-                    <input type="text" required {...register('engName', { required: true })} />
-                    {errors.engName && <p className="error">영어 분류명은 필수값입니다.</p>}
                   </td>
                 </tr>
                 <tr>

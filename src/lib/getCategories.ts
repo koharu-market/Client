@@ -1,8 +1,8 @@
-import { axiosInstance } from './axios';
+import axios from 'axios';
 
 export async function getCategories() {
   try {
-    const response = await axiosInstance.get('/category');
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URI}/category`);
     const categories = response.data;
     return categories;
   } catch (error) {

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { getCookie, setCookie } from 'cookies-next';
 
 const baseURL = process.env.NEXT_PUBLIC_API_URI;
@@ -65,13 +65,12 @@ axiosInstance.interceptors.response.use(
   function (response) {
     return response;
   },
-  async function (error) {
+  async function (error: AxiosError) {
     const originalRequest = error.config;
-    if (error.response.data.message === '토큰 만료') {
+    if (error.response?.status === 401 && originalRequest) {
       try {
         const newAccessToken = await refreshAccessToken();
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
         return axios(originalRequest);
       } catch (refreshError) {
         console.error('Error refreshing token:', refreshError);

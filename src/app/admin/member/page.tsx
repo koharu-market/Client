@@ -10,9 +10,13 @@ export default function CustomerPage() {
 
   useEffect(() => {
     const getUsers = async () => {
-      const response = await axiosInstance.get('/admin/users');
-      const users = response.data;
-      setUsers(users);
+      try {
+        const response = await axiosInstance.get('/admin/users');
+        const users = response.data;
+        setUsers(users);
+      } catch (err) {
+        console.error(err);
+      }
     };
     getUsers();
   }, []);
