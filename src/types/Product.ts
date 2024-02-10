@@ -34,3 +34,13 @@ export interface ProductDetail {
   score: number;
   reviewCount: number;
 }
+
+export interface ProductOption {
+  id: number;
+  productId: number;
+  count: number;
+  price: number;
+  type: number;
+  displayOption: YNType;
+  name: string;
+}
