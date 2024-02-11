@@ -18,6 +18,10 @@
   .container {
     @apply xl:px-0 md:px-10 px-4;
   }
+
+  .product-h2 {
+    @apply text-2xl font-semibold;
+  }
 }
 
 @layer components {
