@@ -8,16 +8,17 @@ import Delivery from './Delivery';
 
 interface Props {
   content: string;
+  productId: number;
 }
 
-export default function ProductDetail({ content }: Props) {
+export default function ProductDetail({ content, productId }: Props) {
   return (
     <div>
       <Element name="tab1">
         <Info content={content} />
       </Element>
       <Element name="tab2">
-        <Review />
+        <Review productId={productId} />
       </Element>
       <Element name="tab3">
         <Question />

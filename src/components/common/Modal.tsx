@@ -8,9 +8,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  position?: 'top' | 'center' | 'bottom';
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, position = 'center' }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const isTablet = useMediaQuery({ maxWidth: responsive.tablet });
 
@@ -60,7 +61,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     <>
       {isOpen && (
         <div className="fixed inset-0 w-full h-full overflow-hidden flex items-center justify-center z-50 bg-[rgba(0,0,0,0.5)]">
-          <div ref={modalRef} className="absolute bottom-0 w-full bg-white rounded-t-lg shadow-lg p-4 pb-2">
+          <div
+            ref={modalRef}
+            className={`absolute ${position === 'bottom' ? 'bottom-0' : ''} ${
+              position === 'top' ? 'top-0' : ''
+            } left-0 right-0`}
+          >
             {children}
           </div>
         </div>
