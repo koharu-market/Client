@@ -1,5 +1,4 @@
 import ProductInfo from './_component/ProductInfo';
-import Tabs from './_component/ui/Tabs';
 import ProductDetail from './_component/ProductDetail';
 import { getProduct } from './_lib/getProduct';
 import 'swiper/css';
@@ -18,7 +17,6 @@ export default async function ProductDetailPage({ params }: Props) {
   return (
     <main className="container pb-20">
       <ProductInfo product={product} />
-      <Tabs />
       <ProductDetail content={product.content} />
     </main>
   );

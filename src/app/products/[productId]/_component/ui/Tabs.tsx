@@ -3,15 +3,15 @@
 import { useState } from 'react';
 import { Link } from 'react-scroll';
 
-const tabs = ['상품정보', '리뷰', '문의', '배송/환불'];
+// const tabs = ['상품정보', '리뷰', '문의', '배송/환불'];
 
-export default function Tabs() {
-  const [tab, setTab] = useState('tab1');
+interface Props {
+  tabs: string[];
+  tab: string;
+  setTab: React.Dispatch<React.SetStateAction<string>>;
+}
 
-  const selectTab = (selectedTab: string) => {
-    setTab(selectedTab);
-  };
-
+export default function Tabs({ tabs, tab, setTab }: Props) {
   return (
     <div className="sticky md:top-24 top-[60px] mt-14 bg-white md:border-b-0 border-b">
       <nav>
@@ -31,7 +31,7 @@ export default function Tabs() {
                     tab === `tab${index}` ? 'border-black border-b-2' : 'text-gray-400'
                   }`}
                   onSetActive={to => setTab(to)}
-                  onClick={() => selectTab(`tab${index}`)}
+                  onClick={() => setTab(`tab${index}`)}
                 >
                   {item === '리뷰' ? (
                     <span>

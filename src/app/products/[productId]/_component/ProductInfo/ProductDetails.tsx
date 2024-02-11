@@ -1,19 +1,30 @@
 import Rating from '@/components/common/Score';
 import calculateDiscountRate from '@/lib/calculateDiscountRate';
 import { ProductDetail } from '@/types/Product';
+import { Link } from 'react-scroll';
 
 interface Props {
   product: ProductDetail;
+  setTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function ProductDetails({ product }: Props) {
+export default function ProductDetails({ product, setTab }: Props) {
   return (
     <div>
       <h2 className="md:text-2xl text-lg font-medium">{product.name}</h2>
       <div className="mt-1">
-        <a href="#rating">
+        <Link
+          activeClass="active"
+          to={`tab2`}
+          spy={true}
+          smooth={true}
+          offset={-180}
+          duration={0}
+          onSetActive={to => setTab(to)}
+          className="cursor-pointer"
+        >
           <Rating score={product.score} reviewCount={product.reviewCount} />
-        </a>
+        </Link>
       </div>
       <div className="md:mt-2">
         {product.type4 === 'N' ? (
