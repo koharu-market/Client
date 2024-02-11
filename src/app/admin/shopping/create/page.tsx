@@ -11,9 +11,9 @@ import AddOption from './_component/AddOption';
 import OptionList from './_component/OptionList';
 import { Option } from './types/Option';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Button } from '../../_component/common/Button';
 import { UploadFileInfo } from '@/types/Uploads';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/common/Button';
 
 interface FormData {
   name: string;

@@ -27,7 +27,7 @@ export function Button({ children, onClick, color = 'default', type = 'button', 
 const buttonTheme = {
   color: {
     default: 'bg-white-400 border-gray-400 hover:bg-gray-100',
-    blue: 'text-white bg-blue-400 border-blue-400 hover:bg-blue-300',
+    blue: 'text-white bg-blue-400 border-blue-400 hover:bg-blue-300 hover:border-blue-300',
   },
 
   size: {

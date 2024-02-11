@@ -1,8 +1,8 @@
 'use client';
 
 import { useInput } from '@/hooks/useInput';
-import { Button } from '../../../_component/common/Button';
 import { Option } from '../types/Option';
+import { Button } from '@/components/common/Button';
 
 interface Props {
   setOptions: React.Dispatch<React.SetStateAction<Option[] | undefined>>;
