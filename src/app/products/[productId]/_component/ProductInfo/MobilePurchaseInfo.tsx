@@ -15,7 +15,7 @@ interface Props {
 
 export default function MobilePurchaseInfo({ isOpen, closeModal, product, count, setCount }: Props) {
   return (
-    <Modal isOpen={isOpen} onClose={closeModal} position="bottom">
+    <Modal isOpen={isOpen} onClose={closeModal}>
       <div className=" w-full bg-white rounded-t-lg shadow-lg p-4 pb-2 absolute bottom-0 left-0 right-0">
         <div>
           <SellingOption name={product.name} sale={product.sale} count={count} setCount={setCount} />
