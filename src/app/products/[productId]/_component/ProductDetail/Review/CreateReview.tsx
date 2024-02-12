@@ -36,8 +36,8 @@ export default function CreateReview({ isOpen, closeModal, productId }: Props) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={closeModal}>
-      <div className=" bg-white w-[760px] mx-auto p-10">
+    <Modal isOpen={isOpen} onClose={closeModal} onRequestClose={false}>
+      <div className=" bg-white w-[760px] mx-auto p-10 rounded-md">
         <h2 className="product-h2 text-center mb-5">리뷰 쓰기</h2>
         <div className="mb-5">
           <div className="font-semibold mb-2">별점 평가</div>
