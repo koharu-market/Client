@@ -1,7 +1,7 @@
 'use client';
 
-import Modal from '@/components/common/Modal';
-import { useState } from 'react';
+import Modal, { ConfirmModal } from '@/components/common/Modal';
+import { useEffect, useState } from 'react';
 import StarRating from '../../ui/StarRating';
 import { Button } from '@/components/common/Button';
 import { axiosInstance } from '@/lib/axios';
@@ -13,8 +13,24 @@ interface Props {
 }
 
 export default function CreateReview({ isOpen, closeModal, productId }: Props) {
+  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
   const [score, setScore] = useState(0);
   const [content, setContent] = useState('');
+
+  const handleCancel = () => {
+    setConfirmModalIsOpen(false);
+  };
+
+  const openConfirmModal = () => {
+    setConfirmModalIsOpen(true);
+  };
+
+  const closeConfirmModal = () => {
+    closeModal();
+    handleCancel();
+    setScore(0);
+    setContent('');
+  };
 
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -36,35 +52,50 @@ export default function CreateReview({ isOpen, closeModal, productId }: Props) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={closeModal} onRequestClose={false}>
-      <div className=" bg-white w-[760px] mx-auto p-10 rounded-md">
-        <h2 className="product-h2 text-center mb-5">리뷰 쓰기</h2>
-        <div className="mb-5">
-          <div className="font-semibold mb-2">별점 평가</div>
-          <div className="flex gap-4 items-center">
-            <div>만족도</div>
-            <StarRating onSetScore={setScore} defaultScore={score} />
+    <>
+      <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+        onRequestClose={false}
+        showHeader={true}
+        showConfirmModal={openConfirmModal}
+      >
+        <div className=" bg-white w-[760px] mx-auto p-10 rounded-md">
+          <h2 className="product-h2 text-center mb-5">리뷰 쓰기</h2>
+          <div className="mb-5">
+            <div className="font-semibold mb-2">별점 평가</div>
+            <div className="flex gap-4 items-center">
+              <div>만족도</div>
+              <StarRating onSetScore={setScore} defaultScore={score} />
+            </div>
           </div>
-        </div>
-        <div className="mb-5">
-          <div className="font-semibold mb-2">사진 첨부 (선택)</div>
-        </div>
-        <div className="mb-10">
-          <div className="font-semibold mb-2">리뷰 작성</div>
-          <div className="relative">
-            <textarea
-              className="w-full p-2 pb-5 border-[#dbdbdb] border rounded-md h-28 resize-none"
-              placeholder="자세하고 솔직한 리뷰는 다른 고객에게 큰 도움이 됩니다. (최소 10자 이상)"
-              value={content}
-              onChange={onChangeContent}
-            />
-            <div className="absolute right-2 bottom-2 text-sm">{content.length}</div>
+          <div className="mb-5">
+            <div className="font-semibold mb-2">사진 첨부 (선택)</div>
           </div>
+          <div className="mb-10">
+            <div className="font-semibold mb-2">리뷰 작성</div>
+            <div className="relative">
+              <textarea
+                className="w-full p-2 pb-5 border-[#dbdbdb] border rounded-md h-28 resize-none"
+                placeholder="자세하고 솔직한 리뷰는 다른 고객에게 큰 도움이 됩니다. (최소 10자 이상)"
+                value={content}
+                onChange={onChangeContent}
+              />
+              <div className="absolute right-2 bottom-2 text-sm">{content.length}</div>
+            </div>
+          </div>
+          <Button onClick={onSubmit} size="full" color="blue">
+            완료
+          </Button>
         </div>
-        <Button onClick={onSubmit} size="full" color="blue">
-          완료
-        </Button>
-      </div>
-    </Modal>
+      </Modal>
+      <ConfirmModal isOpen={confirmModalIsOpen} handleCancel={handleCancel} onClose={closeConfirmModal}>
+        <p>
+          리뷰를 작성하지 않고 나가겠습니까?
+          <br />
+          작성한 내용은 저장되지 않습니다.
+        </p>
+      </ConfirmModal>
+    </>
   );
 }
