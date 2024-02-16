@@ -3,11 +3,6 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'image.idus.com',
-        pathname: '**',
-      },
-      {
         protocol: 'http',
         hostname: 'localhost',
         pathname: '**',
