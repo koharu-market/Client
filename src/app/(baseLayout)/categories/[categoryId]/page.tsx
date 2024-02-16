@@ -1,5 +1,5 @@
 import ProductList from '../../_component/ui/ProductList';
-import { getCategory } from './_lib/getCategory';
+import { getProducts } from './_lib/getProducts';
 
 interface Props {
   params: {
@@ -9,7 +9,7 @@ interface Props {
 
 export default async function CategoriesPage({ params }: Props) {
   const { categoryId } = params;
-  const products = await getCategory(categoryId);
+  const products = await getProducts(categoryId);
 
   return <ProductList products={products} />;
 }
