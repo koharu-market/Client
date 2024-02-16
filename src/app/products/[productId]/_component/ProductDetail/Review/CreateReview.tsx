@@ -1,7 +1,7 @@
 'use client';
 
 import Modal, { ConfirmModal } from '@/components/common/Modal';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import StarRating from '../../ui/StarRating';
 import { Button } from '@/components/common/Button';
 import { axiosInstance } from '@/lib/axios';

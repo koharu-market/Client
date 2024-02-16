@@ -28,7 +28,6 @@ export default function CreateCategoryPage() {
 
   const onSubmit: SubmitHandler<FormData> = async data => {
     const res = await axiosInstance.post('/admin/category', data);
-    console.log(res);
   };
 
   return (
