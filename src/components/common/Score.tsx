@@ -1,8 +1,8 @@
 import { Product } from '@/types/Product';
 
 interface Props {
-  score?: number;
-  reviewCount?: number;
+  score: number;
+  reviewCount: number;
 }
 
 export default function Score({ score, reviewCount }: Props) {
@@ -20,7 +20,7 @@ export default function Score({ score, reviewCount }: Props) {
             backgroundImage: `url('/score.png')`,
             backgroundSize: '70px',
             backgroundPositionY: '-17px',
-            width: `${score}%`,
+            width: `${score * 20}%`,
           }}
           className={`bg-no-repeat inline-block h-4 absolute`}
         ></span>
