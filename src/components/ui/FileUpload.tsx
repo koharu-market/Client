@@ -10,9 +10,35 @@ import { AiOutlineClose, AiOutlineCamera } from 'react-icons/ai';
 interface Props {
   myFiles: UploadFileInfo[];
   setMyFiles: React.Dispatch<React.SetStateAction<UploadFileInfo[]>>;
+  maxFiles: number;
+  path: 'products' | 'reviews';
 }
 
-export default function FileUpload({ myFiles, setMyFiles }: Props) {
+export default function FileUpload({ myFiles, setMyFiles, maxFiles, path }: Props) {
+  const handleUpload = useCallback(
+    async (formData: FormData) => {
+      try {
+        const response = await axiosInstance.post(`/uploads/${path}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        if (response.status === 201) {
+          console.log('File upload successful');
+          return response.data;
+        } else {
+          console.error('File upload failed');
+        }
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
+
+      return null;
+    },
+    [path],
+  );
+
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       try {
@@ -33,7 +59,7 @@ export default function FileUpload({ myFiles, setMyFiles }: Props) {
               })),
             );
 
-            const truncatedFiles = updatedFiles.slice(0, 5);
+            const truncatedFiles = updatedFiles.slice(0, maxFiles);
 
             return truncatedFiles;
           });
@@ -42,17 +68,19 @@ export default function FileUpload({ myFiles, setMyFiles }: Props) {
         console.error('Error handling drop:', error);
       }
     },
-    [setMyFiles],
+    [setMyFiles, handleUpload, maxFiles],
   );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
   });
 
-  const removeFile = (file: UploadFileInfo) => () => {
-    const newFiles = myFiles.filter(f => f !== file);
-    setMyFiles(newFiles);
-  };
+  const removeFile = useCallback(
+    (file: UploadFileInfo) => () => {
+      setMyFiles(prev => prev.filter(f => f !== file));
+    },
+    [setMyFiles],
+  );
 
   const files = myFiles.map(file => (
     <li key={file.path} className="relative">
@@ -73,33 +101,12 @@ export default function FileUpload({ myFiles, setMyFiles }: Props) {
     </li>
   ));
 
-  const remainingCameraIcons = Math.max(5 - myFiles.length, 0);
+  const remainingCameraIcons = Math.max(maxFiles - myFiles.length, 0);
   const cameraIcons = Array.from({ length: remainingCameraIcons }, (_, index) => (
     <li key={`camera-${index}`}>
       <AiOutlineCamera className="w-32 h-[72px] text-slate-300" />
     </li>
   ));
-
-  const handleUpload = async (formData: FormData) => {
-    try {
-      const response = await axiosInstance.post('/uploads/multiple', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      if (response.status === 201) {
-        console.log('File upload successful');
-        return response.data;
-      } else {
-        console.error('File upload failed');
-      }
-    } catch (error) {
-      console.error('Error uploading file:', error);
-    }
-
-    return null;
-  };
 
   return (
     <div className="flex flex-col">

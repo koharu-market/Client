@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { ListBox as IListBox } from '@/types/ListBox';
 import { axiosInstance } from '@/lib/axios';
 import Editor from '../_component/Editor';
-import FileUpload from '../_component/FileUpload';
+import FileUpload from '@/components/ui/FileUpload';
 import TableWrap from '../../_component/ui/TableWrap';
 import AddOption from './_component/AddOption';
 import OptionList from './_component/OptionList';
@@ -194,7 +194,7 @@ export default function CreatePage() {
                     <th>대표 이미지</th>
                     <td>
                       <div>
-                        <FileUpload myFiles={myFiles} setMyFiles={setMyFiles} />
+                        <FileUpload myFiles={myFiles} setMyFiles={setMyFiles} maxFiles={6} path="products" />
                       </div>
                     </td>
                   </tr>
