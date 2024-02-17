@@ -9,9 +9,10 @@ interface Props {
   tabs: string[];
   tab: string;
   setTab: React.Dispatch<React.SetStateAction<string>>;
+  reviewCount: number;
 }
 
-export default function Tabs({ tabs, tab, setTab }: Props) {
+export default function Tabs({ tabs, tab, setTab, reviewCount }: Props) {
   return (
     <div className="sticky md:top-24 top-[60px] mt-14 bg-white md:border-b-0 border-b">
       <nav>
@@ -35,7 +36,7 @@ export default function Tabs({ tabs, tab, setTab }: Props) {
                 >
                   {item === '리뷰' ? (
                     <span>
-                      리뷰 <span className="font-normal">(0)</span>
+                      리뷰 <span className="font-normal">({reviewCount})</span>
                     </span>
                   ) : item === '문의' ? (
                     <span>

@@ -55,7 +55,7 @@ export default function ProductInfo({ product }: Props) {
           </div>
         </div>
       </div>
-      <Tabs tabs={tabs} tab={tab} setTab={setTab} />
+      <Tabs tabs={tabs} tab={tab} setTab={setTab} reviewCount={product.reviewCount} />
     </>
   );
 }

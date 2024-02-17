@@ -5,20 +5,20 @@ import Info from './Info';
 import Review from './Review';
 import Question from './Question';
 import Delivery from './Delivery';
+import { ProductDetail as IProductDetail } from '@/types/Product';
 
 interface Props {
-  content: string;
-  productId: number;
+  product: IProductDetail;
 }
 
-export default function ProductDetail({ content, productId }: Props) {
+export default function ProductDetail({ product }: Props) {
   return (
     <div>
       <Element name="tab1">
-        <Info content={content} />
+        <Info content={product.content} />
       </Element>
       <Element name="tab2">
-        <Review productId={productId} />
+        <Review productId={product.id} score={product.score} reviewCount={product.reviewCount} />
       </Element>
       <Element name="tab3">
         <Question />
