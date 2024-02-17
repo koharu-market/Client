@@ -1,6 +1,6 @@
 import { Product } from '@/types/Product';
 import Image from 'next/image';
-import Score from '../../../../components/common/Score';
+import Score from '../../../../components/ui/Score';
 import Link from 'next/link';
 import calculateDiscountRate from '@/lib/calculateDiscountRate';
 

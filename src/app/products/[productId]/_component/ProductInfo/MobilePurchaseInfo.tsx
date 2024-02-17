@@ -1,6 +1,6 @@
 'use client';
 
-import Modal from '@/components/common/Modal';
+import Modal from '@/components/ui/Modal';
 import SellingOption from '../ui/SellingOption';
 import { ProductDetail } from '@/types/Product';
 import TotalPrice from '../ui/TotalPrice';

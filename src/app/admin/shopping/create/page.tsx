@@ -1,5 +1,5 @@
 'use client';
-import ListBox from '@/components/common/ListBox';
+import ListBox from '@/components/ui/ListBox';
 import Header from '../../_component/ui/Header';
 import { useEffect, useState } from 'react';
 import { ListBox as IListBox } from '@/types/ListBox';
@@ -13,7 +13,7 @@ import { Option } from './types/Option';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { UploadFileInfo } from '@/types/Uploads';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/common/Button';
+import { Button } from '@/components/ui/Button';
 
 interface FormData {
   name: string;

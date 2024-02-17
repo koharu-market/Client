@@ -2,7 +2,7 @@
 
 import { useInput } from '@/hooks/useInput';
 import { Option } from '../types/Option';
-import { Button } from '@/components/common/Button';
+import { Button } from '@/components/ui/Button';
 
 interface Props {
   setOptions: React.Dispatch<React.SetStateAction<Option[] | undefined>>;

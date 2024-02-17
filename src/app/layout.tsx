@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import AuthSession from '@/components/AuthSession';
-import ScrollButton from '@/components/common/ScrollButton';
+import ScrollButton from '@/components/ui/ScrollButton';
 
 const inter = Inter({ subsets: ['latin'] });
 

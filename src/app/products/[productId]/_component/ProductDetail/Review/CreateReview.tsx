@@ -1,9 +1,9 @@
 'use client';
 
-import Modal, { ConfirmModal } from '@/components/common/Modal';
+import Modal, { ConfirmModal } from '@/components/ui/Modal';
 import { useState } from 'react';
 import StarRating from '../../ui/StarRating';
-import { Button } from '@/components/common/Button';
+import { Button } from '@/components/ui/Button';
 import { axiosInstance } from '@/lib/axios';
 
 interface Props {

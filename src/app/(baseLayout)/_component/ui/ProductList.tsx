@@ -2,7 +2,7 @@
 
 import Card from '@/app/(baseLayout)/_component/ui/Card';
 import CardList from '@/app/(baseLayout)/_component/ui/CardList';
-import ListBox from '@/components/common/ListBox';
+import ListBox from '@/components/ui/ListBox';
 import useCategoryFilter from '@/hooks/useCategoryFilter';
 import { sortingOptions } from '@/data/sortingOptions';
 import Pagination from './Pagination';

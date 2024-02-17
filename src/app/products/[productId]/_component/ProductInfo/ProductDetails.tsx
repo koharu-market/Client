@@ -1,4 +1,4 @@
-import Rating from '@/components/common/Score';
+import Rating from '@/components/ui/Score';
 import calculateDiscountRate from '@/lib/calculateDiscountRate';
 import { ProductDetail } from '@/types/Product';
 import { Link } from 'react-scroll';
