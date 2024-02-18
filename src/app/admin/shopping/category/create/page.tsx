@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/app/admin/_component/common/Button';
+import { Button } from '@/components/ui/Button';
 import Header from '@/app/admin/_component/ui/Header';
 import TableWrap from '@/app/admin/_component/ui/TableWrap';
 import { axiosInstance } from '@/lib/axios';

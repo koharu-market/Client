@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { Button } from '../../_component/common/Button';
+import { Button } from '@/components/ui/Button';
 import Header from '../../_component/ui/Header';
 
 export default function CategoryPage() {
