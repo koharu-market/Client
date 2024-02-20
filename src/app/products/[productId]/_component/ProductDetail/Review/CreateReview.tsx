@@ -5,6 +5,8 @@ import { useState } from 'react';
 import StarRating from '../../ui/StarRating';
 import { Button } from '@/components/ui/Button';
 import { axiosInstance } from '@/lib/axios';
+import FileUpload from '@/components/ui/FileUpload';
+import { UploadFileInfo } from '@/types/Uploads';
 
 interface Props {
   isOpen: boolean;
@@ -14,6 +16,7 @@ interface Props {
 
 export default function CreateReview({ isOpen, closeModal, productId }: Props) {
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
+  const [myFiles, setMyFiles] = useState<UploadFileInfo[]>([]);
   const [score, setScore] = useState(0);
   const [content, setContent] = useState('');
 
@@ -30,6 +33,7 @@ export default function CreateReview({ isOpen, closeModal, productId }: Props) {
     handleCancel();
     setScore(0);
     setContent('');
+    setMyFiles([]);
   };
 
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -45,9 +49,7 @@ export default function CreateReview({ isOpen, closeModal, productId }: Props) {
       productId,
     });
     if (response.status === 201) {
-      setScore(0);
-      setContent('');
-      closeModal();
+      closeConfirmModal();
     }
   };
 
@@ -71,6 +73,7 @@ export default function CreateReview({ isOpen, closeModal, productId }: Props) {
           </div>
           <div className="mb-5">
             <div className="font-semibold mb-2">사진 첨부 (선택)</div>
+            <FileUpload myFiles={myFiles} setMyFiles={setMyFiles} maxFiles={3} path="reviews" />
           </div>
           <div className="mb-10">
             <div className="font-semibold mb-2">리뷰 작성</div>
